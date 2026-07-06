@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>S. Thejas — Software Developer</title>
+<meta name="description" content="S. Thejas — B.Tech IT student, aspiring software developer, cybersecurity enthusiast, and independent crypto trader." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FDF6E3;
+    --bg-alt: #F5EFDC;
+    --panel: #FFFDF6;
+    --line: #DDD3B8;
+    --ink: #073642;
+    --ink-soft: #586E75;
+    --blue: #268BD2;
+    --cyan: #2AA198;
+    --orange: #CB4B16;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --sans: 'Inter', system-ui, sans-serif;
+    --radius: 6px;
+    --maxw: 880px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: var(--blue); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--orange);
+    outline-offset: 3px;
+  }
+
+  ::selection{ background: var(--cyan); color: #fff; }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(253,246,227,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .logo{
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .logo span{ color: var(--orange); }
+  .nav-links{
+    display: flex;
+    gap: 20px;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .nav-links a{ color: var(--ink-soft); }
+  .nav-links a:hover{ color: var(--blue); text-decoration: none; }
+
+  main{ max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Hero / terminal ---------- */
+  .hero{ padding: 56px 0 40px; }
+  .terminal{
+    background: #06282F;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(7,54,66,0.18);
+    border: 1px solid #0a3a44;
+  }
+  .term-bar{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding: 10px 14px;
+    background: #052026;
+    border-bottom: 1px solid #0a3a44;
+  }
+  .dot{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .dot.r{ background:#e0625b; }
+  .dot.y{ background:#e6c157; }
+  .dot.g{ background:#5cb87a; }
+  .term-title{
+    margin-left: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #7fa8ab;
+  }
+  .term-body{
+    padding: 22px 20px 26px;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: #cfece7;
+    min-height: 190px;
+  }
+  .term-body .line{ margin: 0 0 6px; white-space: pre-wrap; }
+  .prompt{ color: #5cb87a; }
+  .prompt::after{ content: " "; }
+  .path{ color: #7fa8ab; }
+  .out{ color: #FDF6E3; }
+  .out-accent{ color: #E5B567; }
+  .cursor{
+    display:inline-block;
+    width: 8px;
+    height: 16px;
+    background: #cfece7;
+    vertical-align: text-bottom;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity: 0; } }
+
+  .hero-caption{
+    margin-top: 18px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Section headers (code-comment style) ---------- */
+  .section{ padding: 34px 0; border-top: 1px solid var(--line); }
+  .section:first-of-type{ border-top: none; }
+  .comment-tag{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--cyan);
+    margin: 0 0 4px;
+  }
+  .comment-tag .punc{ color: var(--ink-soft); }
+  h2.section-title{
+    margin: 0 0 18px;
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  p{ margin: 0 0 14px; color: var(--ink); }
+  .lede{ font-size: 16px; max-width: 66ch; }
+
+  /* ---------- Skills ---------- */
+  .skills-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .skill-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+  }
+  .skill-card h3{
+    margin: 0 0 8px;
+    font-family: var(--mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--orange);
+  }
+  .tag-row{ display:flex; flex-wrap:wrap; gap: 8px; }
+  .tag{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    padding: 4px 9px;
+    border-radius: 4px;
+    color: var(--ink);
+  }
+
+  /* ---------- Entry blocks (education / experience / projects) ---------- */
+  .entry{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--blue);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 14px;
+  }
+  .entry.orange{ border-left-color: var(--orange); }
+  .entry.cyan{ border-left-color: var(--cyan); }
+  .entry-head{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px 16px;
+    margin-bottom: 6px;
+  }
+  .entry-title{
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .entry-org{
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+  }
+  .entry-date{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .entry ul{ margin: 8px 0 0; padding-left: 20px; }
+  .entry li{ margin-bottom: 6px; }
+  .placeholder{ color: var(--ink-soft); }
+  .placeholder-note{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--orange);
+    margin-top: 10px;
+    border-top: 1px dashed var(--line);
+    padding-top: 8px;
+  }
+
+  /* ---------- Interests ---------- */
+  .chip-row{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+  }
+
+  /* ---------- Contact / footer ---------- */
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 30px 0 50px;
+  }
+  .contact-list{
+    display:flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 14px;
+  }
+  .contact-list a{ color: var(--ink); }
+  .contact-list a:hover{ color: var(--blue); }
+  .copyright{
+    margin-top: 24px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 560px){
+    .hero{ padding: 40px 0 30px; }
+    .term-body{ font-size: 12.5px; padding: 18px 14px 22px; }
+    h2.section-title{ font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">~/<span>thejas</span></div>
+    <div class="nav-links">
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#experience">experience</a>
+      <a href="#projects">projects</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <div class="terminal">
+      <div class="term-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="term-title">thejas@portfolio: ~</span>
+      </div>
+      <div class="term-body" id="termBody" aria-label="Terminal introduction"></div>
+    </div>
+    <p class="hero-caption">B.Tech IT student · Hindustan College of Engineering and Technology · Tirupur, Tamil Nadu</p>
+  </section>
+
+  <section class="section" id="about">
+    <p class="comment-tag"><span class="punc">/*</span> summary <span class="punc">*/</span></p>
+    <h2 class="section-title">About</h2>
+    <p class="lede">
+      Motivated Information Technology undergraduate with a strong foundation in Python, C++, and SQL,
+      and a genuine passion for problem-solving and building software. Self-driven learner with hands-on
+      interest in software development and ethical hacking / cybersecurity concepts. Independently manages
+      a disciplined cryptocurrency trading portfolio on Binance, demonstrating analytical thinking, risk
+      management, and market research skills applicable to data-driven engineering roles.
+    </p>
+  </section>
+
+  <section class="section" id="skills">
+    <p class="comment-tag"><span class="punc">/*</span> skills <span class="punc">*/</span></p>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Languages</h3>
+        <div class="tag-row">
+          <span class="tag">Python</span>
+          <span class="tag">C++</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Databases</h3>
+        <div class="tag-row">
+          <span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Domains of Interest</h3>
+        <div class="tag-row">
+          <span class="tag">Software Development</span>
+          <span class="tag">Ethical Hacking</span>
+          <span class="tag">Cybersecurity Fundamentals</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Trading Platforms</h3>
+        <div class="tag-row">
+          <span class="tag">Binance</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Strengths</h3>
+        <div class="tag-row">
+          <span class="tag">Analytical Thinking</span>
+          <span class="tag">Self-Learning</span>
+          <span class="tag">Risk Analysis</span>
+          <span class="tag">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <p class="comment-tag"><span class="punc">/*</span> education <span class="punc">*/</span></p>
+    <h2 class="section-title">Education</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">B.Tech, Information Technology</span>
+        <span class="entry-date">Expected 2027</span>
+      </div>
+      <div class="entry-org">Hindustan College of Engineering and Technology</div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <p class="comment-tag"><span class="punc">/*</span> experience <span class="punc">*/</span></p>
+    <h2 class="section-title">Relevant Experience</h2>
+    <div class="entry orange">
+      <div class="entry-head">
+        <span class="entry-title">Independent Cryptocurrency Trader</span>
+        <span class="entry-date">2024 — Present</span>
+      </div>
+      <div class="entry-org">Binance</div>
+      <ul>
+        <li>Independently managed a personal cryptocurrency trading portfolio for over 2 years, applying technical analysis and market research to guide trading decisions.</li>
+        <li>Built and maintained a high-value portfolio through disciplined risk management and continuous tracking of market trends.</li>
+        <li>Developed strong analytical and decision-making skills under real-time, data-driven conditions — directly transferable to software engineering and quantitative problem-solving.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <p class="comment-tag"><span class="punc">/*</span> projects <span class="punc">*/</span></p>
+    <h2 class="section-title">Projects</h2>
+    <div class="entry cyan">
+      <div class="entry-head">
+        <span class="entry-title placeholder">[Project Name] — add your strongest project</span>
+        <span class="entry-date">2025</span>
+      </div>
+      <div class="entry-org placeholder">Personal / Academic Project</div>
+      <ul>
+        <li class="placeholder">Briefly describe what you built, e.g. "Built a Python-based tool that automates X, reducing Y by Z%."</li>
+        <li class="placeholder">Mention the tech stack used, e.g. Python, SQL, C++.</li>
+      </ul>
+    </div>
+    <div class="entry cyan">
+      <div class="entry-head">
+        <span class="entry-title placeholder">[Second Project Name]</span>
+        <span class="entry-date">2025</span>
+      </div>
+      <div class="entry-org placeholder">Personal / Academic Project</div>
+      <ul>
+        <li class="placeholder">Add a second project — even a small script, database project, or class assignment counts.</li>
+      </ul>
+    </div>
+    <p class="placeholder-note">// TODO: replace the bracketed placeholders above with your real projects before publishing</p>
+  </section>
+
+  <section class="section" id="interests">
+    <p class="comment-tag"><span class="punc">/*</span> interests <span class="punc">*/</span></p>
+    <h2 class="section-title">Interests</h2>
+    <div class="chip-row">
+      <span class="chip">Software Development &amp; Programming</span>
+      <span class="chip">Ethical Hacking &amp; Cybersecurity</span>
+      <span class="chip">Cryptocurrency Markets &amp; Trading Strategy</span>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p class="comment-tag"><span class="punc">/*</span> contact <span class="punc">*/</span></p>
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="contact-list">
+      <a href="mailto:theajus004@gmail.com">theajus004@gmail.com</a>
+      <a href="tel:+918525910081">+91 85259 10081</a>
+      <span>Tirupur, Tamil Nadu, India</span>
+    </div>
+    <p class="copyright">&copy; 2026 S. Thejas. Built with HTML &amp; CSS.</p>
+  </footer>
+
+</main>
+
+<script>
+  (function(){
+    var body = document.getElementById('termBody');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var lines = [
+      { prompt: '$ ', text: 'whoami', type: 'cmd' },
+      { text: 'S. Thejas', type: 'out' },
+      { prompt: '$ ', text: 'cat role.txt', type: 'cmd' },
+      { text: 'Aspiring Software Developer', type: 'out-accent' },
+      { prompt: '$ ', text: 'cat focus.txt', type: 'cmd' },
+      { text: 'Python · C++ · SQL · Cybersecurity fundamentals', type: 'out' },
+      { prompt: '$ ', text: 'echo $STATUS', type: 'cmd' },
+      { text: 'Open to software development opportunities', type: 'out-accent' }
+    ];
+
+    if (reduced) {
+      lines.forEach(function(l){
+        var p = document.createElement('p');
+        p.className = 'line';
+        if (l.type === 'cmd') {
+          p.innerHTML = '<span class="prompt">$</span><span class="path"> </span>' + l.text;
+        } else {
+          p.innerHTML = '<span class="' + (l.type === 'out-accent' ? 'out-accent' : 'out') + '">' + l.text + '</span>';
+        }
+        body.appendChild(p);
+      });
+      return;
+    }
+
+    var li = 0, ci = 0;
+    var currentP = null;
+
+    function typeNext(){
+      if (li >= lines.length) {
+        var cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        body.appendChild(cursor);
+        return;
+      }
+      var l = lines[li];
+      if (ci === 0) {
+        currentP = document.createElement('p');
+        currentP.className = 'line';
+        body.appendChild(currentP);
+      }
+      if (l.type === 'cmd') {
+        var shown = l.text.slice(0, ci + 1);
+        currentP.innerHTML = '<span class="prompt">$</span><span class="path"> </span>' + shown;
+        ci++;
+        if (ci >= l.text.length) { li++; ci = 0; setTimeout(typeNext, 260); }
+        else setTimeout(typeNext, 28);
+      } else {
+        currentP.innerHTML = '<span class="' + (l.type === 'out-accent' ? 'out-accent' : 'out') + '">' + l.text + '</span>';
+        li++; ci = 0;
+        setTimeout(typeNext, 320);
+      }
+    }
+    typeNext();
+  })();
+</script>
+
+</body>
+</html>
